@@ -1,5 +1,4 @@
-const mysql = require("mysql2");
-const { MongoClient } = require('mongodb');
+const { connectToMongoDB, connectToMysqlDB } = require("./ConexionADB");
 
 const connectToDB = (ip, port, isMongoConnection) => {
     if (isMongoConnection) {
@@ -12,29 +11,6 @@ const connectToDB = (ip, port, isMongoConnection) => {
           .then(console.log)
           .catch(err => console.log(err));
     }
-}
-
-const connectToMysqlDB = async (ip,port) => {
-
-    const connection = mysql.createConnection({
-    host: ip,
-    port,
-    // user: 'usuario aqui',
-    // password: 'password aqui',
-    });
-    return await connection;
-};
-
-const connectToMongoDB = async (ip, port) => {
-
-    const url = `mongodb://${ip}:${port}`;
-    const client = new MongoClient(url);
-
-    await client.connect();
-    console.log('Connected successfully to server');
-
-    return "done";
-
 }
 
 // Para correr esta ejecución y querer conectarse a MongoDB
